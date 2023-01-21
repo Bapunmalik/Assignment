@@ -35,6 +35,8 @@ void printList() {
     }
 }
 
+
+ 
 int main() {
     int n,val;
     printf("Enter How Many data to insert ?");
@@ -46,6 +48,7 @@ int main() {
         insert(val);
     }
     printList();
+        
 
     return 0;
 }
