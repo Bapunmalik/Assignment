@@ -25,6 +25,7 @@ int main()
     head->next=NULL;
     node *temp=head;
     while(1){
+    printf("----------------------------------------------------------\n");
     printf("--------------------------MENU---------------------------\n");
     printf("\t1.Insert\n\t2.Delete\n\t3.Display\n\t4.Total Student\n\t5.Exit\n");
     printf("Choose an  Option :");

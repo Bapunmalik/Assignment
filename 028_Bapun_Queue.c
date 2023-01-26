@@ -74,16 +74,22 @@ node* enQueue(node* rear)
 void display(node *front)
 {
     front=front->next;
+    if(front==NULL)
+    {
+        printf("No Student Record found\n");
+    }
     while(front!=NULL)
     {
         printf("Name  :%s\n",front->name);
+        printf("Rollnumber :%d\n",front->roll);
+        printf("Marks :%d\n",front->marks);
         front=front->next;
     }
 }
 
 node* deQueue(node *front)
 {
-    // node *temp=front->next;
+    node *temp=front;
     if(isEmpty(&(*front))==1)
     {
         printf("Student List is Empty\n");
@@ -94,6 +100,7 @@ node* deQueue(node *front)
         front=front->next;
         count--;
     }
+    free(temp);
     return front;
 }
 
