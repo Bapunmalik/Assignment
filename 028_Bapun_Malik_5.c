@@ -7,22 +7,25 @@ typedef struct node
     struct node *next;
 } node;
 
-node *insert(node *ex, int cof, int exp);//function to create a linked list
-node *display(node *ex);//for display the list
-void polysum(node *expr1, node *expr2);//addition function
-void polydiff(node *expr1, node *expr2);//difference function
-void polymulti(node *expr1, node *expr2);//multiplication function
+/* function declaration. */
+node *insert(node *ex, int cof, int exp); // function to create a linked list
+node *display(node *ex);                  // for display the list
+void polysum(node *expr1, node *expr2);   // addition function
+void polydiff(node *expr1, node *expr2);  // difference function
+void polymulti(node *expr1, node *expr2); // multiplication function
 
-node *sum = NULL;//pointer to store addition list
-node *diff = NULL;//pointer to store difference list
-node *multi = NULL;//pointer to store multiplication list
+/* Declaring three pointers to store the results of the addition, subtraction and multiplication of the
+two polynomials. */
+node *sum = NULL;   // pointer to store addition list
+node *diff = NULL;  // pointer to store difference list
+node *multi = NULL; // pointer to store multiplication list
 int main()
 {
-    node *expr1 = NULL;//pointer to store first expression
-    node *expr2 = NULL;//pointer to store second expression
+    node *expr1 = NULL; // pointer to store first expression
+    node *expr2 = NULL; // pointer to store second expression
 
     char ch;
-    int cof, exp;//cof:coefficent and exp:exponent of expressions 
+    int cof, exp; // cof:coefficent and exp:exponent of expressions
     int i = 1;
     printf("Enter the first polynomial expression :\n");
     do
@@ -70,10 +73,18 @@ int main()
     diff = display(multi);
 }
 
-//creation of nodes and linking them
+/**
+ * It inserts a new node in the linked list in a sorted manner
+ *
+ * @param ex The head of the linked list
+ * @param cof coefficient
+ * @param exp The expression to be inserted into.
+ *
+ * @return the head of the linked list.
+ */
 node *insert(node *ex, int cof, int exp)
 {
-    node *t=ex;
+    node *t = ex;
     node *new_node = (node *)malloc(sizeof(node));
     new_node->coef = cof;
     new_node->expo = exp;
@@ -90,15 +101,15 @@ node *insert(node *ex, int cof, int exp)
         ex = new_node;
         return ex;
     }
-    while(t!=NULL)
+    while (t != NULL)
     {
-        if(t->expo==new_node->expo)
+        if (t->expo == new_node->expo)
         {
-            t->expo=new_node->expo;
-            t->coef=t->coef+new_node->coef;
+            t->expo = new_node->expo;
+            t->coef = t->coef + new_node->coef;
             return ex;
         }
-        t=t->next;
+        t = t->next;
     }
     node *temp = ex;
     while (temp->next != NULL && temp->next->expo > new_node->expo)
@@ -109,7 +120,14 @@ node *insert(node *ex, int cof, int exp)
     temp->next = new_node;
     return ex;
 }
-//takes first node address and display all nodes
+
+/**
+ * It displays the polynomial
+ *
+ * @param ex the expression
+ *
+ * @return The first node of the linked list.
+ */
 node *display(node *ex)
 {
     node *temp = ex;
@@ -124,7 +142,14 @@ node *display(node *ex)
     } while (ex != NULL);
     return temp;
 }
-//takes address of two expression and add them
+/**
+ * It adds two polynomials and stores the result in a third polynomial
+ *
+ * @param expr1 the first polynomial
+ * @param expr2 the second polynomial
+ *
+ * @return Nothing.
+ */
 void polysum(node *expr1, node *expr2)
 {
     while (expr1 != NULL && expr2 != NULL)
@@ -158,7 +183,15 @@ void polysum(node *expr1, node *expr2)
     }
     return;
 }
-//takes address of two expression and substract them
+
+/**
+ * It takes two polynomials and subtracts them, storing the result in a third polynomial
+ *
+ * @param expr1 The first polynomial
+ * @param expr2 the polynomial to be subtracted from expr1
+ *
+ * @return Nothing.
+ */
 void polydiff(node *expr1, node *expr2)
 {
     while (expr1 != NULL && expr2 != NULL)
@@ -192,11 +225,19 @@ void polydiff(node *expr1, node *expr2)
     }
     return;
 }
-//takes address of two expression and multiply them
+// takes address of two expression and multiply them
+/**
+ * It takes two polynomials and multiplies them together
+ *
+ * @param expr1 the first polynomial
+ * @param expr2  the second polynomial
+ *
+ * @return Nothing.
+ */
 void polymulti(node *expr1, node *expr2)
 {
     int x, y;
-    node *temp=expr2;
+    node *temp = expr2;
     while (expr1 != NULL)
     {
 
@@ -209,16 +250,16 @@ void polymulti(node *expr1, node *expr2)
             }
             else
             {
-                if(expr1->expo==0)
-                y=expr2->expo;
+                if (expr1->expo == 0)
+                    y = expr2->expo;
                 else
-                y=expr1->expo;
+                    y = expr1->expo;
             }
-            multi=insert(multi,x,y);
-            expr2=expr2->next;
+            multi = insert(multi, x, y);
+            expr2 = expr2->next;
         }
-        expr1=expr1->next;
-        expr2=temp;
+        expr1 = expr1->next;
+        expr2 = temp;
     }
     return;
 }
